@@ -1,0 +1,22 @@
+{
+  "name": "ne-data-before",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/node-engine/ne-data-before.git"
+  },
+  "author": "Bernard Hamann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/node-engine/ne-data-before/issues"
+  },
+  "homepage": "https://github.com/node-engine/ne-data-before#readme",
+  "dependencies": {
+    "axios": "^0.5.4"
+  }
+}
