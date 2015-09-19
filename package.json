@@ -1,6 +1,6 @@
 {
   "name": "ne-data",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool to request data from api's for pages using the Node Engine methodology",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/node-engine/ne-data-before.git"
+    "url": "git+https://github.com/node-engine/ne-data.git"
   },
   "author": "Bernard Hamann",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/node-engine/ne-data-before/issues"
+    "url": "https://github.com/node-engine/ne-data/issues"
   },
-  "homepage": "https://github.com/node-engine/ne-data-before#readme",
+  "homepage": "https://github.com/node-engine/ne-data#readme",
   "dependencies": {
     "axios": "^0.5.4"
   }
