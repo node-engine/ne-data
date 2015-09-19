@@ -1,8 +1,8 @@
 var axios = require ('axios');
 
-var dataBefore = {
+var neData = {
 
-    fetch: function(pageAPIPath, pathString){
+    before: function(pageAPIPath, pathString){
         var self = this;
         return axios.all([this.getPage(pageAPIPath, pathString)])
             .then(function(page){
@@ -94,6 +94,9 @@ var dataBefore = {
         var query = pdx-query;
         return axios.get(path);
 
+    },
+    after: function(){
+        console.log("Future feature for getting data after the page has rendered already and updating the page")
     }
 
     // pd = pre render data request
@@ -104,4 +107,4 @@ var dataBefore = {
     // pd2query is a object with the query details
 };
 
-module.exports = dataBefore;
+module.exports = neData;

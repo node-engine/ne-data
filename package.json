@@ -1,7 +1,7 @@
 {
-  "name": "ne-data-before",
-  "version": "1.0.0",
-  "description": "",
+  "name": "ne-data",
+  "version": "1.0.1",
+  "description": "A tool to request data from api's for pages using the Node Engine methodology",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
