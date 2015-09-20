@@ -1,6 +1,6 @@
 {
   "name": "ne-data",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A tool to request data from api's for pages using the Node Engine methodology",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/node-engine/ne-data#readme",
   "dependencies": {
-    "axios": "^0.5.4"
+    "axios": "^0.5.4",
+    "lodash": "^3.10.1"
   }
 }
