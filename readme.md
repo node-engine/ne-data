@@ -6,7 +6,7 @@ A tool to request data from api's for pages using the Node Engine methodology
 
 ```js
 
-var meta = neData.meta(req, handlerConfig);
+var meta = neData.meta(req, appConfig);
 
 ```
 
