@@ -2,6 +2,10 @@
 
 A tool to request data from api's for pages using the Node Engine methodology
 
+To get the most out of ne-data use it with ne-server, ne-render and ne-mongo-rest.
+
+For a smaple of a complete app see ne-sample.
+
 ## Get meta for handler
 
 ```js
