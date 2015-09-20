@@ -3,15 +3,17 @@ var _ = require('lodash');
 
 var neData = {
 
-    meta: function (req, handlerConfig){
+    meta: function (req, appConfig){
 
         var path = req.path
         console.log('path');
         console.log(path);
 
-        var meta = _.find(handlerConfig.config, { path: path });
+        var meta = _.find(appConfig.paths, { path: path });
 
-        console.log('metaeta init');
+        meta.globals = appConfig.globals;
+
+        console.log('meta init');
         console.log(meta);
 
         if (meta === undefined){
@@ -25,17 +27,17 @@ var neData = {
                 }
             };
 
+            console.log('meta defualt set');
+            console.log(meta);
+
             return meta
         }
 
         if (meta.nedCustom){
 
-            console.log('meta in custom before')
-            console.log(meta)
+            var meta = appConfig.custom(meta, req)
 
-            var meta = handlerConfig.custom(meta, req)
-
-            console.log('meta in custom after')
+            console.log('meta with custom')
             console.log(meta)
 
             return meta
@@ -43,9 +45,6 @@ var neData = {
         }
 
         else {
-
-            console.log('meta init else');
-            console.log(meta);
 
             return meta
 
@@ -65,7 +64,7 @@ var neData = {
 
             console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
 
-            var nedb1 = meta.nedBefore.nedb1
+            var nedb1 = meta.nedBefore.nedb1;
             return axios.all([self.getBefore(nedb1)])
                 .then(function(results){
                     return {
@@ -78,8 +77,8 @@ var neData = {
 
             console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
 
-            var nedb1 = meta.nedBefore.nedb1
-            var nedb2 = meta.nedBefore.nedb2
+            var nedb1 = meta.nedBefore.nedb1;
+            var nedb2 = meta.nedBefore.nedb2;
             return axios.all([self.getBefore(nedb1),self.getBefore(nedb2)])
                 .then(function(results){
                     return {
@@ -93,9 +92,9 @@ var neData = {
 
             console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
 
-            var nedb1 = dataReq.nedBefore.nedb1
-            var nedb2 = dataReq.nedBefore.nedb2
-            var nedb3 = dataReq.nedBefore.nedb3
+            var nedb1 = dataReq.nedBefore.nedb1;
+            var nedb2 = dataReq.nedBefore.nedb2;
+            var nedb3 = dataReq.nedBefore.nedb3;
             return axios.all([self.getBefore(nedb1),self.getBefore(nedb2),self.getBefore(nedb3)])
                 .then(function(results){
                     return {
