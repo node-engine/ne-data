@@ -3,15 +3,15 @@ var _ = require('lodash');
 
 var neData = {
 
-    meta: function (req, appConfig){
+    meta: function (req, appmeta){
 
-        var path = req.path
+        var path = req.path;
         console.log('path');
         console.log(path);
 
-        var meta = _.find(appConfig.paths, { path: path });
+        var meta = _.find(appmeta.paths, { path: path });
 
-        meta.globals = appConfig.globals;
+        meta.globals = appmeta.globals;
 
         console.log('meta init');
         console.log(meta);
@@ -35,7 +35,7 @@ var neData = {
 
         if (meta.nedCustom){
 
-            var meta = appConfig.custom(meta, req)
+            var meta = appmeta.custom(meta, req)
 
             console.log('meta with custom')
             console.log(meta)
@@ -129,6 +129,8 @@ var neData = {
     getBefore: function(nedbx) {
         var path = nedbx.path;
         var query = nedbx-query;
+        console.log('path');
+        console.log(path);
         return axios.get(path);
 
     },
