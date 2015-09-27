@@ -11,11 +11,6 @@ var neData = {
 
         var meta = _.find(appmeta.paths, { path: path });
 
-        meta.globals = appmeta.globals;
-
-        console.log('meta init');
-        console.log(meta);
-
         if (meta === undefined){
 
             var meta = {
@@ -27,18 +22,25 @@ var neData = {
                 }
             };
 
-            console.log('meta defualt set');
+            meta.globals = appmeta.globals;
+
+            console.log('meta default set');
             console.log(meta);
 
             return meta
         }
 
-        if (meta.nedCustom){
+        meta.globals = appmeta.globals;
 
-            var meta = appmeta.custom(meta, req)
+        console.log('meta init');
+        console.log(meta);
 
-            console.log('meta with custom')
-            console.log(meta)
+        if (meta.neDataCustom){
+
+            var meta = appmeta.custom(meta, req);
+
+            console.log('meta with custom');
+            console.log(meta);
 
             return meta
 
@@ -46,7 +48,7 @@ var neData = {
 
         else {
 
-            return meta
+            return meta;
 
             // this.sendMeta(routeMeta);
 
@@ -55,16 +57,38 @@ var neData = {
 
     },
 
+    timeout: function (){
+        setTimeout(function(){
+            console.log("Error: You dont have permission to view this content");
+        },6000);
+    },
+
+    startTimeout: function(){
+        this.timeout();
+    },
+
+    stopTimeout: function(){
+        clearTimeout(timeout);
+    },
+
+    reqParser: function (req, state){
+
+        state.query = req.query;
+
+    },
+
     before: function(meta){
         var self = this;
 
-        var nedbNumber = meta.nedBefore.number;
+        var nedbNumber = meta.neDataBefore;
 
         if (nedbNumber === 1) {
 
             console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
 
-            var nedb1 = meta.nedBefore.nedb1;
+            var nedb1 = meta.nedb1;
+            // meta.nedb1.func();
+
             return axios.all([self.getBefore(nedb1)])
                 .then(function(results){
                     return {
@@ -77,8 +101,8 @@ var neData = {
 
             console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
 
-            var nedb1 = meta.nedBefore.nedb1;
-            var nedb2 = meta.nedBefore.nedb2;
+            var nedb1 = meta.nedb1;
+            var nedb2 = meta.nedb2;
             return axios.all([self.getBefore(nedb1),self.getBefore(nedb2)])
                 .then(function(results){
                     return {
@@ -92,9 +116,9 @@ var neData = {
 
             console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
 
-            var nedb1 = dataReq.nedBefore.nedb1;
-            var nedb2 = dataReq.nedBefore.nedb2;
-            var nedb3 = dataReq.nedBefore.nedb3;
+            var nedb1 = meta.nedb1;
+            var nedb2 = meta.nedb2;
+            var nedb3 = meta.nedb3;
             return axios.all([self.getBefore(nedb1),self.getBefore(nedb2),self.getBefore(nedb3)])
                 .then(function(results){
                     return {
