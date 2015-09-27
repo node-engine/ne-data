@@ -9,7 +9,7 @@ var neData = {
         console.log('path');
         console.log(path);
 
-        var meta = _.find(appmeta.paths, { path: path });
+        var meta = _.find(appmeta, { path: path });
 
         if (meta === undefined){
 
@@ -22,7 +22,7 @@ var neData = {
                 }
             };
 
-            meta.globals = appmeta.globals;
+            meta.appname = process.env.APPNAME;
 
             console.log('meta default set');
             console.log(meta);
@@ -30,7 +30,7 @@ var neData = {
             return meta
         }
 
-        meta.globals = appmeta.globals;
+        meta.appname = process.env.APPNAME;
 
         console.log('meta init');
         console.log(meta);
