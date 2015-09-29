@@ -151,8 +151,14 @@ var neData = {
     },
 
     getBefore: function(nedbx) {
-        var path = nedbx.path;
-        var query = nedbx-query;
+        if(nedbx.pathFunction){
+            var path = nedbx.pathFunction();
+        }
+        else {
+            var path = nedbx.path;
+            var query = nedbx-query;
+        }
+
         console.log('path');
         console.log(path);
         return axios.get(path);
