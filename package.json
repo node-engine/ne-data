@@ -1,6 +1,6 @@
 {
   "name": "ne-data",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "A tool to request data from api's for pages using the Node Engine methodology",
   "main": "index.js",
   "scripts": {

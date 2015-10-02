@@ -89,7 +89,7 @@ var neData = {
             var nedb1 = meta.nedb1;
             // meta.nedb1.func();
 
-            return axios.all([self.getBefore(nedb1)])
+            return axios.all([self.getBefore(nedb1, meta)])
                 .then(function(results){
                     return {
                         nedb1: results[0].data
@@ -103,7 +103,7 @@ var neData = {
 
             var nedb1 = meta.nedb1;
             var nedb2 = meta.nedb2;
-            return axios.all([self.getBefore(nedb1),self.getBefore(nedb2)])
+            return axios.all([self.getBefore(nedb1, meta),self.getBefore(nedb2, meta)])
                 .then(function(results){
                     return {
                         nedb1: results[0].data,
@@ -119,7 +119,7 @@ var neData = {
             var nedb1 = meta.nedb1;
             var nedb2 = meta.nedb2;
             var nedb3 = meta.nedb3;
-            return axios.all([self.getBefore(nedb1),self.getBefore(nedb2),self.getBefore(nedb3)])
+            return axios.all([self.getBefore(nedb1, meta),self.getBefore(nedb2, meta),self.getBefore(nedb3, meta)])
                 .then(function(results){
                     return {
                         nedb1: results[0].data,
@@ -150,9 +150,9 @@ var neData = {
         }
     },
 
-    getBefore: function(nedbx) {
+    getBefore: function(nedbx, meta) {
         if(nedbx.pathFunction){
-            var path = nedbx.pathFunction();
+            var path = nedbx.pathFunction(meta);
         }
         else {
             var path = nedbx.path;
