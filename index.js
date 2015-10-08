@@ -3,11 +3,11 @@ var _ = require('lodash');
 
 var neData = {
 
-    meta: function (req, appmeta){
+    meta: function (req, appmeta, pathForMeta){
 
-        var path = req.path;
-        console.log('path');
-        console.log(path);
+        var path = pathForMeta;
+        console.log('pathForMeta');
+        console.log(pathForMeta);
 
         var meta = _.find(appmeta, { path: path });
 
