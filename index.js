@@ -6,8 +6,13 @@ var neData = {
     meta: function (req, appmeta, pathForMeta){
 
         var path = pathForMeta;
-        console.log('pathForMeta');
+
+        console.log('');
+        console.log('');
+        console.log('ne-data: pathForMeta');
         console.log(pathForMeta);
+        console.log('');
+        console.log('');
 
         var meta = _.find(appmeta, { path: path });
 
@@ -24,23 +29,35 @@ var neData = {
 
             meta.appname = process.env.APPNAME;
 
-            console.log('meta default set');
+            console.log('');
+            console.log('');
+            console.log('ne-data: meta default set');
             console.log(meta);
+            console.log('');
+            console.log('');
 
             return meta
         }
 
         meta.appname = process.env.APPNAME;
 
-        console.log('meta init');
+        console.log('');
+        console.log('');
+        console.log('ne-data: meta init');
         console.log(meta);
+        console.log('');
+        console.log('');
 
         if (meta.neDataCustom){
 
             var meta = appmeta.custom(meta, req);
 
-            console.log('meta with custom');
+            console.log('');
+            console.log('');
+            console.log('ne-data: meta with custom');
             console.log(meta);
+            console.log('');
+            console.log('');
 
             return meta
 
@@ -59,7 +76,11 @@ var neData = {
 
     timeout: function (){
         setTimeout(function(){
-            console.log("Error: You dont have permission to view this content");
+            console.log('');
+            console.log('');
+            console.log("ne-data: Error: You dont have permission to view this content");
+            console.log('');
+            console.log('');
         },6000);
     },
 
@@ -84,7 +105,11 @@ var neData = {
 
         if (nedbNumber === 1) {
 
-            console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
+            console.log('');
+            console.log('');
+            console.log("ne-data: Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
+            console.log('');
+            console.log('');
 
             var nedb1 = meta.nedb1;
             // meta.nedb1.func();
@@ -99,7 +124,11 @@ var neData = {
 
         else if (nedbNumber === 2) {
 
-            console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
+            console.log('');
+            console.log('');
+            console.log("ne-data: Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
+            console.log('');
+            console.log('');
 
             var nedb1 = meta.nedb1;
             var nedb2 = meta.nedb2;
@@ -114,7 +143,11 @@ var neData = {
 
         else if (nedbNumber === 3) {
 
-            console.log("Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
+            console.log('');
+            console.log('');
+            console.log("ne-data: Requesting < " + nedbNumber + " nedb packets > for < " + meta.title +" >");
+            console.log('');
+            console.log('');
 
             var nedb1 = meta.nedb1;
             var nedb2 = meta.nedb2;
@@ -130,19 +163,31 @@ var neData = {
         }
 
         else if (nedbNumber > 3)  {
-            console.log("The page had" + nedbNumber + "pre render data requests" );
+
+            console.log('');
+            console.log('');
+            console.log("ne-data: The page had" + nedbNumber + "pre render data requests" );
             console.log("Only a maximun of 3 pre render data requests are supported");
             console.log("If you need more it can be added on request by opening an issue on github");
+            console.log('');
+            console.log('');
+
             return {
                 errorMessage: "dataNumber did not match",
                 dataNumber: nedbNumber
             }
         }
         else {
-            console.log("nedbNumber Error");
+
+            console.log('');
+            console.log('');
+            console.log("ne-data: nedbNumber Error");
             console.log("The page had" + nedbNumber + "pre render data requests" );
             console.log("Only a maximun of 3 pre render data requests are supported");
             console.log("If you need more it can be added on request by opening an issue on github");
+            console.log('');
+            console.log('');
+
             return {
                 errorMessage: "pdNumber error",
                 pdNumber: nedbNumber
@@ -159,8 +204,13 @@ var neData = {
             var query = nedbx-query;
         }
 
-        console.log('path');
+        console.log('');
+        console.log('');
+        console.log('ne-data: path');
         console.log(path);
+        console.log('');
+        console.log('');
+
         return axios.get(path);
 
     },
@@ -170,7 +220,12 @@ var neData = {
     },
 
     after: function(){
-        console.log("Future feature for getting data after the page has rendered already and updating the page")
+
+        console.log('');
+        console.log('');
+        console.log("ne-data: Future feature for getting data after the page has rendered already and updating the page")
+        console.log('');
+        console.log('');
     },
 
     cycleAfter: function(){
