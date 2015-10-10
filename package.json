@@ -1,6 +1,6 @@
 {
   "name": "ne-data",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "description",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/node-engine/ne-data#readme",
   "dependencies": {
-    "lodash": "^3.10.1"
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "ne-auth": "^1.2.0",
+    "passport-http-bearer": "^1.0.1"
   }
 }
