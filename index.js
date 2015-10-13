@@ -31,6 +31,17 @@ var neData = {
             var q1 = {};
             q1[f1] = v1;
 
+            var skipValue
+            if (req.query.limit){
+
+                pageNumber = parseInt(req.query.batch) - 1;
+                skipValue = req.query.limit * pageNumber;
+            }
+            else {
+                skipValue = 0
+            }
+
+
             if (v1 != null) {
                 Model
                     .find(
@@ -40,7 +51,7 @@ var neData = {
                     {_id: 1}
                 )
                     .skip(
-                    req.query.limit * req.query.batch
+                    skipValue
                 )
                     .limit(
                     req.query.limit
@@ -58,7 +69,7 @@ var neData = {
                     {_id: 1}
                 )
                     .skip(
-                    req.query.limit * req.query.batch
+                    skipValue
                 )
                     .limit(
                     req.query.limit
@@ -76,6 +87,16 @@ var neData = {
             var q1 = {};
             q1[f1] = v1;
 
+            var skipValue
+            if (req.query.limit){
+
+                pageNumber = parseInt(req.query.batch) - 1;
+                skipValue = req.query.limit * pageNumber;
+            }
+            else {
+                skipValue = 0
+            }
+
             Model
                 .find(
                 q1
@@ -84,7 +105,7 @@ var neData = {
                 {_id: 1}
             )
                 .skip(
-                req.query.limit * req.query.batch
+                skipValue
             )
                 .limit(
                 req.query.limit
@@ -111,6 +132,16 @@ var neData = {
                 var q1 = {};
                 q1[f1] = v1;
 
+                var skipValue
+                if (req.query.limit){
+
+                    pageNumber = parseInt(req.query.batch) - 1;
+                    skipValue = req.query.limit * pageNumber;
+                }
+                else {
+                    skipValue = 0
+                }
+
                 if (v1 != null) {
                     Model
                         .find(
@@ -120,7 +151,7 @@ var neData = {
                         {_id: 1}
                     )
                         .skip(
-                        req.query.limit * req.query.batch
+                        skipValue
                     )
                         .limit(
                         req.query.limit
@@ -138,7 +169,7 @@ var neData = {
                         {_id: 1}
                     )
                         .skip(
-                        req.query.limit * req.query.batch
+                        skipValue
                     )
                         .limit(
                         req.query.limit
@@ -160,6 +191,16 @@ var neData = {
                 var q1 = {};
                 q1[f1] = v1;
 
+                var skipValue
+                if (req.query.limit){
+
+                    pageNumber = parseInt(req.query.batch) - 1;
+                    skipValue = req.query.limit * pageNumber;
+                }
+                else {
+                    skipValue = 0
+                }
+
                 Model
                     .find(
                     q1
@@ -168,7 +209,7 @@ var neData = {
                     {_id: 1}
                 )
                     .skip(
-                    req.query.limit * req.query.batch
+                    skipValue
                 )
                     .limit(
                     req.query.limit

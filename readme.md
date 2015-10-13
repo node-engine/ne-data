@@ -157,7 +157,7 @@ results
 ### Cycle through docs in the collection
 
 get request 1
-- http://localhost:3001/api/people?limit=3&batch=0
+- http://localhost:3001/api/people?limit=3&batch=1
 
 where 
 - api = the apiPath you specified
@@ -169,7 +169,7 @@ results
 - the 1st, 2nd and 3rd document in the collection
 
 get request 2
-- http://localhost:3001/api/people?limit=3&batch=1
+- http://localhost:3001/api/people?limit=3&batch=2
 
 where 
 - api = the apiPath you specified
@@ -181,7 +181,7 @@ results
 - the 4th, 5th and 6th document in the collection
 
 get request 3
-- http://localhost:3001/api/people?limit=3&batch=2
+- http://localhost:3001/api/people?limit=3&batch=3
 
 where 
 - api = the apiPath you specified
