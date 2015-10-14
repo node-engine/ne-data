@@ -18,7 +18,7 @@ var neData = {
             var routePath = apiPath + "/" + filename.substr(0,filename.length - 3);
 
             var router = express.Router();
-            require(dirName + apiPath + '/' + filename)(router, passport, strategyName);
+            require(dirName + apiPath + '/' + filename).routes(router, passport, strategyName);
             server.use(routePath, router);
 
         });
