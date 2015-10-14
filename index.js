@@ -6,7 +6,9 @@ var neAuth = require ('ne-auth');
 
 var neData = {
 
-    routesConfig: function (server, dirName, apiPath, passport, strategyName){
+    routesConfig: function (server, dirName, passport, strategyName){
+
+        var apiPath = "/api";
 
         // This is used for mongodb and the api stuff cross origin resource sharing
         server.use(cors());
