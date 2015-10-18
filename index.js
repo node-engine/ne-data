@@ -8,17 +8,17 @@ var neData = {
 
     routesConfig: function (server, dirName, passport, strategyName){
 
-        var apiPath = "/api";
+        var dataPath = "/data";
 
         // This is used for mongodb and the api stuff cross origin resource sharing
         server.use(cors());
 
-        fs.readdirSync(dirName + apiPath ).forEach(function(filename) {
+        fs.readdirSync(dirName + dataPath ).forEach(function(filename) {
 
-            var routePath = apiPath + "/" + filename.substr(0,filename.length - 3);
+            var routePath = dataPath + "/" + filename.substr(0,filename.length - 3);
 
             var router = express.Router();
-            require(dirName + apiPath + '/' + filename).routes(router, passport, strategyName);
+            require(dirName + dataPath + '/' + filename).routes(router, passport, strategyName);
             server.use(routePath, router);
 
         });
