@@ -1,7 +1,6 @@
 var fs = require('fs');
 var cors = require('cors');
 var express = require('express');
-var BearerStrategy = require('passport-http-bearer').Strategy;
 var neAuth = require ('ne-auth');
 
 var neData = {
