@@ -1,6 +1,6 @@
 {
   "name": "ne-data",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "description",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "cors": "^2.7.1",
     "express": "^4.13.3",
     "lodash": "^3.10.1",
-    "ne-auth": "^1.2.0",
+    "ne-auth": "^1.3.0",
     "passport-http-bearer": "^1.0.1"
   }
 }
