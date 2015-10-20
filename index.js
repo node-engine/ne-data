@@ -1,7 +1,15 @@
 var fs = require('fs');
-var cors = require('cors');
-var express = require('express');
-var neAuth = require ('ne-auth');
+
+if (process.env.NE_AUTO) {
+    var cors = require(process.env.NE_AUTO).cors;
+    var express = require(process.env.NE_AUTO).express;
+    var neAuth = require (process.env.NE_AUTO).neAuth;
+}
+else {
+    var cors = require('cors');
+    var express = require('express');
+    var neAuth = require ('ne-auth');
+}
 
 var neData = {
 
