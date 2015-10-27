@@ -22,44 +22,18 @@ Dependencies
 - DU Update Dependency: A dependency is updated in the package
 
 
+## 1.9.4
+
+Release date: 20151028
+
+[FN] removed 1.9.3
+
+
 ## 1.9.3
 
 Release date: 20151028
 
 [FN] buildFormFields(dataName, object, dataRef, options)
-- Adding a utility to generate the form field code in handlers
-- dataName = the name of the model in the database
-- object =  the object whose fields you want to generate the edit form fields for
-- dataRef = the complete dataRef object, the dataName is used to find the dataRef for this object
-- options.noEdit = if present and set to true then all the generated field will not be editable
-- options.editGroup = can specify to only generate fields for a specific editGroup
-- fields in the dataRef can be given editGroup names. Example editGroup: "anything"
-- each field has a className of "ne-data-field-" + dataName
-
-Code Snippet inside a handler
-
-```js
-
-var objectForFields = self.props.data.application[0];
-var dataRef = self.props.dataRef;
-var noEdit;
-if(self.props.data.application[0] && self.props.data.application[0].status && self.props.data.application[0].status === "completed"){
-    noEdit = true
-}
-else{
-    noEdit = false
-}
-
-applicationForCurrentUser = element(
-    "form", {action: "/data-alt/applications/edit", method: "post"},
-    buildEditFields("applications", objectForFields, dataRef, {editGroup:"student", noEdit: noEdit}),
-    element(
-        "input",
-        { type: "submit" , value: "Go"}
-    )
-);
-
-```
 
 
 ## 1.9.2

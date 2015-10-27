@@ -992,8 +992,6 @@ var neData = {
         console.log("This Feature is not available yet");
     },
 
-    buildFormFields: require('./utilities/buildFormFields')
-
 };
 
 module.exports = neData;
