@@ -377,6 +377,91 @@ results
 - The document with the _id of 55eefa231c0eba0d2c72af40 is removed
 
 
+## dataRef
+
+Example dataRef object
+
+```js
+
+var dataRef = {
+    "name": "emails",
+    "slug": "/admin/emails",
+    "apiSlug": "/data/emails",
+    "interfaceType": "default",
+    "cycleByDefault": false,
+    "batchSize": 10,
+    "type": "noEdit",
+    "categories": ["undefined"],
+    "tags": [],
+    "fields": [
+        {
+            name: "p1",
+            data: "nameFirst",
+            type: "noEdit"
+        },
+        {
+            name: "p2",
+            data: "nameLast",
+            type: "noEdit"
+        },
+        {
+            name: "p3",
+            data: "email",
+            type: "noEdit"
+        },
+        {
+            name: "p3",
+            data: "user",
+            type: "ObjectId"
+        }
+    ]
+};
+
+```
+
+### Field Display types 
+
+This is used when displaying data in this field
+
+displayType: "string"
+- This field contains a string
+- This is the default
+- Not not need to add this it is assumed that a field is a string unless otherwise specified
+
+displayType: "ObjectId"
+- this field is the object id of another document in another collection
+
+displayType: "array"
+- this field is an array of strings 
+
+
+### Field Edit types 
+
+This is used when editing data in this field
+
+editType: "text"
+- This fieled contains a string
+- This is the default
+- Not not need to add this it is assumed that the field can be edited with a text input
+
+editType: "noEdit"
+- can not edit this field in ne-admin
+
+editType: "select"
+- Select the value of this field from a list of values 
+- if this edit type is specified the editOptions array must also be provided
+- selectOptions: ["option1", "option2"]
+
+editType: "textarea"
+- The user is given a textarea instead of a text box to edit the field.
+
+editType: "html" (Future feature)
+- The user is given a html area instead of a text box to edit the field.
+
+editType: "" (Future feature)
+- The user is given a html area instead of a text box to edit the field.
+
+
 ## License 
 
 The MIT License (MIT)

@@ -1,5 +1,4 @@
 var fs = require('fs');
-
 var cors = require('cors');
 var express = require('express');
 var neAuth = require ('ne-auth');
@@ -991,7 +990,9 @@ var neData = {
 
     custom: function (){
         console.log("This Feature is not available yet");
-    }
+    },
+
+    buildFormFields: require('./utilities/buildFormFields')
 
 };
 
