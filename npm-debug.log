@@ -1,0 +1,99 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/bernard/-Cloud/Github/ne-data',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/bernard/.npm/ne-data/1.9.4/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/bernard/.npm/ne-data/1.9.4/package.tgz',
+9 verbose tar pack   '/Users/bernard/-Cloud/Github/ne-data' ]
+10 verbose tarball /Users/bernard/.npm/ne-data/1.9.4/package.tgz
+11 verbose folder /Users/bernard/-Cloud/Github/ne-data
+12 info prepublish ne-data@1.9.4
+13 verbose addLocalTarball adding from inside cache /Users/bernard/.npm/ne-data/1.9.4/package.tgz
+14 silly cache afterAdd ne-data@1.9.4
+15 verbose afterAdd /Users/bernard/.npm/ne-data/1.9.4/package/package.json not in flight; writing
+16 verbose afterAdd /Users/bernard/.npm/ne-data/1.9.4/package/package.json written
+17 silly publish { name: 'ne-data',
+17 silly publish   version: '1.9.4',
+17 silly publish   description: 'description',
+17 silly publish   main: 'index.js',
+17 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://github.com/node-engine/ne-data.git' },
+17 silly publish   author: { name: 'Bernard Hamann' },
+17 silly publish   license: 'ISC',
+17 silly publish   bugs: { url: 'https://github.com/node-engine/ne-data/issues' },
+17 silly publish   homepage: 'https://github.com/node-engine/ne-data#readme',
+17 silly publish   dependencies:
+17 silly publish    { cors: '^2.7.1',
+17 silly publish      express: '^4.13.3',
+17 silly publish      lodash: '^3.10.1',
+17 silly publish      'ne-auth': 'latest',
+17 silly publish      'passport-http-bearer': '^1.0.1' },
+17 silly publish   readme: '# ne-data (Node Engine Data)\n\nA quick and simple way to create a structured restAPI using, NodeJS, MongoDB and Mongoose.\n\n## Snippit from the Server file \n\nJust add this code and it will automatically add any additional files you place in the api folder. the route for the api will be domain.com/apiPath/filename\n\nwhere\n- apiPath is the apiPath you set in the server file \n- filename is the name of the file in the api folder\n\n```js\n\nvar neData = require(\'ne-data\');\n\nvar dirName = __dirname;\nvar apiPath = "/api";\nneData.server(server, dirName, apiPath);\n\n\n```\n\n## Sample API file\n\nDefine the schema in any way you want and create as many as you want.\n\nThese files need to be in a folder matching the apiPath you provides in the same directory as the server file\n\n```js\n\nvar router = require(\'express\').Router();\nvar mongoose = require(\'mongoose\');\nvar neData = require(\'ne-data\');\n\nvar pageSchema = {\n    path:{type: String, required: true},\n    title:{type: String, required: true},\n    description:{type: String, required: true},\n    pd:{\n        pdNumber:{type: Number, required: false, default: \'0\'},\n        pd1:{\n            path: {type: String, required: false}\n        }\n    },\n    createdAt:{type: String, required: true}\n\n};\n\nvar Model = mongoose.model(\n    \'Page\',\n    pageSchema,\n    \'page\');\n\n\nneData.model(router, Model);\n\n\nmodule.exports = router;\n\n\n```\n\n## API Features\n\nPost \nThe entire request body becomes the object that is posted\n\nGet\nGet by Id\nGet with Limit results to number \nGet with Limit and cycle \n\nPut \nPut by Id\n\nDelete\nDelete by Id\n\nUse query field value pairs find specific documents\nhttp://localhost:3001/api/page?f1=pathField&v1=pathFieldValue\n\n- get will get the document where the pathField matches the pathFieldValue\n- delete will delete the document where the pathField matches the pathFieldValue\n- put will edit the document where the pathField matches the pathFieldValue, two addidional query params are needed to give the field you want to edit and the new value for the that field\n\nIf you are interested in more details on the working of the api please ask.\n\n\n## Steps\n\n1. Connect to mongoDB using mongoose\n2. Require and NPM install the dependencies \n3. Define your schema using mongoose syntax\n4. Use the schema to create a Model\n5. Activate neData by calling neData.init(router, Model)\n\n\n## POST\n\n### Add a document to a collection\n\npost request\n- http://localhost:3001/api/people\n\nwhere \n- people = name of the model/collection\n- req.body = the document you want to add\n- example req.body \n\n```json\n{\n  "firstName": "John",\n  "lastName": "Jackson",\n  "email": "john@jackson.com"\n}\n```\n\nresults \n- Adds the contents of the req.body as a document to the people collection using the mongoose schema.\n\ncomments\n- Example post req with Json body using Postman.\n\n![Post Example using postman](https://raw.githubusercontent.com/node-engine/ne-rest-mongoose/master/media/postman.png)\n\n\n## GET \n\n### Get all in collection\n\nget request\n- http://localhost:3001/api/people\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n\nresults \n- all documents in the people collection\n\n\n### Limit the request to a a number of documents\n\nget request\n- http://localhost:3001/api/people?limit=3\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: limit = the number of documents you want\n\nresults \n- the first 3 documents in the people collection \n\n\n### Cycle through docs in the collection\n\nget request 1\n- http://localhost:3001/api/people?limit=3&batch=1\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: limit = the number number of documents in a cycle \n- query: batch = the cycle number\n\nresults \n- the 1st, 2nd and 3rd document in the collection\n\nget request 2\n- http://localhost:3001/api/people?limit=3&batch=2\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: limit = the number number of documents in a cycle \n- query: batch = the cycle number\n\nresults \n- the 4th, 5th and 6th document in the collection\n\nget request 3\n- http://localhost:3001/api/people?limit=3&batch=3\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: limit = the number number of documents in a cycle \n- query: batch = the cycle number\n\nresults \n- the 7th, 8th and 9th document in the collection\n\n\n### Search for documents where a field matches a value\n\nget request\n- http://localhost:3001/api/people?f1=firstName&v1=John\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: f1 = the field you want to search by\n- query: v1 = the value in the f1 filed you are looking to match\n\nresults \n- all documents in the people collection where the firstName field is John\n\ncomments \n- the search in case sensitive, so if you type john instead og Johh it will not find it.\n\n\n### Get one document in a collection using the document _id\n\nget request\n- http://localhost:3001/api/people/55eefa231c0eba0d2c72af40\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- 55eefa231c0eba0d2c72af40 = the _id of the document you want\n\nresults \n- The document with the _id of 55eefa231c0eba0d2c72af40\n\n\n## PUT\n\n### Search for documents where a field matches a value and give a new value to a field in those documents\n\nput request\n- http://localhost:3001/api/people?f1=firstName&v1=John&fs1=email&vs1=john@jackstrade.com\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: f1 = the field you want to search by\n- query: v1 = the value in the f1 filed you are looking to match\n- query: fs1 = the field you want to edit\n- query: vs1 = the new value for the field you want to edit\n\nresults \n- all documents in the people collection where the firstName field is John gets given a new value of john@jackstrade.com for the email field\n\ncomments \n- the search in case sensitive, so if you type john instead og Johh it will not find it. \n- you can search by one field and edit another field\n- if more than one document matches the search then all those documents will be updated\n- By default only one document is edited if you want to edit all documents matching the query then at a query param called multi=yes (?multi=yes or &multi=yes) \n\n\n### Search for documents where a field matches a value and use a json request body object to update the fields\n\nput request\n- http://localhost:3001/api/people?f1=firstName&v1=John\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- query: f1 = the field you want to search by\n- query: v1 = the value in the f1 filed you are looking to match\n\nresults \n- all documents in the people collection where the firstName field is John\n\ncomments\n\n- See the MongoDB docs on how to format the json req body (http://docs.mongodb.org/manual/reference/method/db.collection.update)\n- By default only one document is edited if you want to edit all documents matching the query then at a query param called multi=yes (?multi=yes or &multi=yes) \n\n- for\n\n```json\n\n{\n  "_id": "55eefa231c0eba0d6c72af40",\n  "firstName": "John",\n  "lastName": "Jackson",\n  "email": "mail@mail.com",\n  "detail": {\n            "thing": "thing value"\n          },\n  "__v": 0,\n  "createdAt": "Fri Sep 18 2015 17:09:51 GMT+0200 (SAST)"\n}\n\n```\n- use this reg body object to define what to edit\n\n```json\n\n{\n  "detail.thing": "new thing value",\n  "email": "newmail@mail.com"\n}\n \n```\n\n### Search for documents by _id and use a json request body object to update the fields\n\nput request\n- http://localhost:3001/api/people/55eefa231c0eba0d6c72af40\n\nwhere \n- api = the apiPath you specified\n- people = name of the model/collection\n- 55eefa231c0eba0d6c72af40 = the _id of the document you want to edit\n\nresults \n- all documents in the people collection where the firstName field is John\n\ncomments\n\n- See the MongoDB docs on how to format the json req body (http://docs.mongodb.org/manual/reference/method/db.collection.update)\n- By default only one document is edited if you want to edit all documents matching the query then at a query param called multi=yes (?multi=yes or &multi=yes) \n\n- for\n\n```json\n\n{\n  "_id": "55eefa231c0eba0d6c72af40",\n  "firstName": "John",\n  "lastName": "Jackson",\n  "email": "mail@mail.com",\n  "detail": {\n            "thing": "thing value"\n          },\n  "__v": 0,\n  "createdAt": "Fri Sep 18 2015 17:09:51 GMT+0200 (SAST)"\n}\n\n```\n- use this reg body object to define what to edit\n\n```json\n\n{\n  "detail.thing": "new thing value",\n  "email": "newmail@mail.com"\n}\n \n \n```\n\n## DELETE\n\n### Remove a document from a collection using a field value combination\n\ndelate request\n- http://localhost:3001/api/people?f1=firstName&v1=John\n\nwhere \n- people = name of the model/collection\n- api = the apiPath you specified\n- query: f1 = the field you want to search by\n- query: v1 = the value in the f1 filed you are looking to match\n\nresults \n- remove documents in the people collection where the firstName field is John\n\ncomments \n- the search in case sensitive, so if you type john instead og Johh it will not find it.\n\n\n### Remove one document in a collection using the document _id\n\ndelete request\n- http://localhost:3001/api/people/55eefa231c0eba0d2c72af40\n\nwhere \n- people = name of the model/collection\n- 55eefa231c0eba0d2c72af40 = the _id of the document you want to remove\n\nresults \n- The document with the _id of 55eefa231c0eba0d2c72af40 is removed\n\n\n## dataRef\n\nExample dataRef object\n\n```js\n\nvar dataRef = {\n    "name": "emails",\n    "slug": "/admin/emails",\n    "apiSlug": "/data/emails",\n    "interfaceType": "default",\n    "cycleByDefault": false,\n    "batchSize": 10,\n    "type": "noEdit",\n    "categories": ["undefined"],\n    "tags": [],\n    "fields": [\n        {\n            name: "p1",\n            data: "nameFirst",\n            type: "noEdit"\n        },\n        {\n            name: "p2",\n            data: "nameLast",\n            type: "noEdit"\n        },\n        {\n            name: "p3",\n            data: "email",\n            type: "noEdit"\n        },\n        {\n            name: "p3",\n            data: "user",\n            type: "ObjectId"\n        }\n    ]\n};\n\n```\n\n### Field Display types \n\nThis is used when displaying data in this field\n\ndisplayType: "string"\n- This field contains a string\n- This is the default\n- Not not need to add this it is assumed that a field is a string unless otherwise specified\n\ndisplayType: "ObjectId"\n- this field is the object id of another document in another collection\n\ndisplayType: "array"\n- this field is an array of strings \n\n\n### Field Edit types \n\nThis is used when editing data in this field\n\neditType: "text"\n- This fieled contains a string\n- This is the default\n- Not not need to add this it is assumed that the field can be edited with a text input\n\neditType: "noEdit"\n- can not edit this field in ne-admin\n\neditType: "select"\n- Select the value of this field from a list of values \n- if this edit type is specified the editOptions array must also be provided\n- selectOptions: ["option1", "option2"]\n\neditType: "textarea"\n- The user is given a textarea instead of a text box to edit the field.\n\neditType: "html" (Future feature)\n- The user is given a html area instead of a text box to edit the field.\n\neditType: "" (Future feature)\n- The user is given a html area instead of a text box to edit the field.\n\n\n## License \n\nThe MIT License (MIT)\n\nCopyright (c) 2015 Bernard Hamann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.',
+17 silly publish   readmeFilename: 'readme.md',
+17 silly publish   gitHead: 'c843ae8f5953a5cc8d08c3fa9b4ca34290aca196',
+17 silly publish   _id: 'ne-data@1.9.4',
+17 silly publish   _shasum: '5b8ae0f0884befc33069c5cca2a19c0ce1985e49',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name ne-data
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/ne-data
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/bernard/.npm/ne-data/1.9.4/package.tgz
+25 verbose request uri https://registry.npmjs.org/ne-data
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 6:05:03 PM
+28 verbose request using bearer token for auth
+29 verbose request id 53619c9c00eeaa23
+30 http request PUT https://registry.npmjs.org/ne-data
+31 http 403 https://registry.npmjs.org/ne-data
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=300',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Sun, 02 Oct 2016 16:05:07 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-lhr6346-LHR',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1475424305.607076,VS0,VE2063',
+32 verbose headers   vary: 'Accept-Encoding' }
+33 verbose request invalidating /Users/bernard/.npm/registry.npmjs.org/ne-data on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 1.9.4." : ne-data
+35 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+36 verbose statusCode 403
+37 verbose pkgid ne-data
+38 verbose cwd /Users/bernard/-Cloud/Github/ne-data
+39 error Darwin 15.6.0
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v4.2.1
+42 error npm  v2.14.7
+43 error code E403
+44 error "You cannot publish over the previously published version 1.9.4." : ne-data
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]
